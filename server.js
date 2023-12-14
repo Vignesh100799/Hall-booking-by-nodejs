@@ -130,7 +130,7 @@ app.post('/rooms', (req, res) => {
         pricePerHour: req.body.pricePerHour,
     };
     rooms.push(newRoom);
-    res.send({ roomId: newRoom.roomId, message: 'Room created successfully' })
+    res.send({message: 'Room created successfully',newRoom })
 })
 // API to Book a room
 app.post("/booking", (req, res) => {
@@ -145,7 +145,7 @@ app.post("/booking", (req, res) => {
         endTime: req.body.endTime,
     };
     bookings.push(newBooking);
-    res.send({ bookingId: newBooking.bookingId, message: 'Room booked successfully' })
+    res.send({message: 'Room booked successfully',newBooking })
    
 })
 
