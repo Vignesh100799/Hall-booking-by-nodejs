@@ -125,6 +125,7 @@ app.post('/rooms', (req, res) => {
     const newRoom = {
         roomId: rooms.length + 1,
         roomName: req.body.roomName,
+        bookedStatus:false,
         seats: req.body.seats,
         amenities: req.body.amenities,
         pricePerHour: req.body.pricePerHour,
@@ -133,11 +134,13 @@ app.post('/rooms', (req, res) => {
     res.send({message: 'Room created successfully',newRoom })
 })
 // API to Book a room
+
 app.post("/booking", (req, res) => {
     const newBooking =
     {
         bookingId: bookings.length + 1,
         customerName: req.body.customerName,
+        bookedStatus:true,
         roomName: req.body.roomName,
         roomId: req.body.roomId,
         date: req.body.date,
@@ -194,7 +197,7 @@ app.get('/customers/:customerName/booking-history', (req, res) => {
       .map((booking) => {
         const room = rooms.find((r) => r.roomId === booking.roomId);
         return {
-          customerName: booking.customerName,
+     
           roomName: room.roomName,
           date: booking.date,
           startTime: booking.startTime,
@@ -204,7 +207,7 @@ app.get('/customers/:customerName/booking-history', (req, res) => {
           bookingStatus: 'Confirmed',
         };
       });
-    res.json(customerBookingHistory);
+    res.json({customerName,Booking_History : customerBookingHistory});
   });
   
 app.listen(port,()=>{
