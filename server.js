@@ -130,7 +130,7 @@ app.post('/rooms', (req, res) => {
         pricePerHour: req.body.pricePerHour,
     };
     rooms.push(newRoom);
-    res.json({ roomId: newRoom.roomId, message: 'Room created successfully' })
+    res.send({ roomId: newRoom.roomId, message: 'Room created successfully' })
 })
 // API to Book a room
 app.post("/booking", (req, res) => {
@@ -145,7 +145,7 @@ app.post("/booking", (req, res) => {
         endTime: req.body.endTime,
     };
     bookings.push(newBooking);
-    res.json({ bookingId: newBooking.bookingId, message: 'Room booked successfully' })
+    res.send({ bookingId: newBooking.bookingId, message: 'Room booked successfully' })
    
 })
 
@@ -155,15 +155,16 @@ app.get("/rooms/booked", (req, res) => {
     const bookedRooms = bookings.map((booking) => {
         const room = rooms.find((r) => r.roomId === booking.roomId);
         return {
-            roomName: room.roomName,
-            bookedStatus: true,
-            customerName: booking.customerName,
-            date: booking.date,
-            startTime: booking.startTime,
-            endTime: booking.endTime,
+            "roomName": booking.roomName,
+            "bookedStatus": "confirmed",
+            "customerName": booking.customerName,
+            "date": booking.date,
+            "startTime": booking.startTime,
+            "endTime": booking.endTime,
         }
     });
-    res.json(bookedRooms);
+    res.send(bookedRooms);
+    
     
 })
 
@@ -175,7 +176,7 @@ app.get("/customers/booked", (req, res) => {
 
         return {
             customerName: booking.customerName,
-            roomName: room.roomName,
+            roomName: booking.roomName,
             date: booking.date,
             startTime: booking.startTime,
             endTime: booking.endTime,
