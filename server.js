@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express()
-const PORT = 4001;
+const port = 4001;
 const rooms = [
       {
         "roomId": 1,
@@ -206,4 +206,6 @@ app.get('/customers/:customerName/booking-history', (req, res) => {
     res.json(customerBookingHistory);
   });
   
-app.listen(PORT)
+app.listen(port,()=>{
+    console.log(`Server is running on http://localhost:${port}`);
+})
