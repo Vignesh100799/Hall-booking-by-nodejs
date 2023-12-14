@@ -197,8 +197,7 @@ app.get('/customers/:customerName/booking-history', (req, res) => {
       .map((booking) => {
         const room = rooms.find((r) => r.roomId === booking.roomId);
         return {
-     
-          roomName: room.roomName,
+          roomName: booking.roomName,
           date: booking.date,
           startTime: booking.startTime,
           endTime: booking.endTime,
